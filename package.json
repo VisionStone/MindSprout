@@ -14,7 +14,45 @@
     "dev:preload": "vite build --config vite.preload.config.ts --mode development --watch",
     "dev:renderer": "vite --config vite.renderer.config.ts",
     "start": "electron .",
-    "test": "vitest"
+    "test": "vitest",
+    "dist": "npm run build && electron-builder",
+    "dist:mac": "npm run build && electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.visionstone.mindsprout",
+    "productName": "MindSprout",
+    "directories": {
+      "output": "release",
+      "buildResources": "buildResources"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "buildResources/splash.html",
+        "to": "splash.html"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "buildResources/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "dmg": {
+      "sign": false
+    }
   },
   "dependencies": {
     "@chenglou/pretext": "^0.0.7",
@@ -35,6 +73,7 @@
     "@types/node": "^22.15.18",
     "concurrently": "^9.1.2",
     "electron": "^36.2.0",
+    "electron-builder": "^26.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.1.6",
     "vite-plugin-solid": "^2.11.6",
