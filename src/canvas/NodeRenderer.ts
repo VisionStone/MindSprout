@@ -65,11 +65,8 @@ function getCachedPrepared(text: string, font: string): PreparedTextWithSegments
   return prepared;
 }
 
-const _sourceIconLoggedNodes = new Set<number>();
-
 export function clearNodeRendererCache(): void {
   prepareCache.clear();
-  _sourceIconLoggedNodes.clear();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -429,10 +426,6 @@ export function drawNode(
 
   // Source link icon (bottom-right, outside node)
   if (node.source_doc) {
-    if (!_sourceIconLoggedNodes.has(node.id)) {
-      _sourceIconLoggedNodes.add(node.id);
-      console.log('[RAG-DEBUG] drawNode source icon — id:', node.id, 'title:', node.title, 'node_type:', node.node_type, 'source_doc:', node.source_doc);
-    }
     const iconCX = x + w - 2;
     const iconCY = y + h + SOURCE_ICON_RADIUS + 2;
     const iconColor = borderColor;

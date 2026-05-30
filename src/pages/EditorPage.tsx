@@ -299,13 +299,11 @@ export default function EditorPage(props: EditorPageProps) {
 
           let sourceDoc: string | undefined;
           let sourceChunk: string | undefined;
-          console.log('[RAG-DEBUG] inputParams:', JSON.stringify(inputParams));
           if (inputParams.mindmap_id) {
             try {
               const storedSources = await window.electronAPI.settings.getSetting<Array<{ doc_filepath: string; doc_filename: string; chunk_content: string }>>(
                 `rag_sources_${inputParams.mindmap_id}`
               );
-              console.log('[RAG-DEBUG] storedSources count:', storedSources?.length ?? 0, 'first filepath:', storedSources?.[0]?.doc_filepath);
               if (storedSources && storedSources.length > 0) {
                 sourceDoc = storedSources[0].doc_filepath;
                 if (storedSources.length === 1) {
@@ -317,12 +315,9 @@ export default function EditorPage(props: EditorPageProps) {
                 }
               }
             } catch (err) {
-              console.log('[RAG-DEBUG] failed to load stored sources:', err);
+              console.error('Failed to load stored sources:', err);
             }
-          } else {
-            console.log('[RAG-DEBUG] no mindmap_id in inputParams, skipping source lookup');
           }
-          console.log('[RAG-DEBUG] final sourceDoc:', sourceDoc ?? '(empty)', 'sourceChunk length:', sourceChunk?.length ?? 0);
 
           const mindmap = (await window.electronAPI.db.createMindmap({
             title: topic,
@@ -340,7 +335,6 @@ export default function EditorPage(props: EditorPageProps) {
             source_doc: sourceDoc,
             source_chunk: sourceChunk,
           })) as Node;
-          console.log('[RAG-DEBUG] rootNode created, id:', rootNode.id, 'source_doc:', rootNode.source_doc, 'source_chunk length:', rootNode.source_chunk?.length ?? 0);
 
           async function createNodesRecursive(
             items: Array<{ title: string; content?: string; children?: Array<{ title: string; content?: string; children?: unknown[] }> }>,
@@ -359,7 +353,6 @@ export default function EditorPage(props: EditorPageProps) {
                 level,
                 sort_order: i,
               })) as Node;
-              console.log('[RAG-DEBUG] child node created, id:', node.id, 'title:', node.title, 'source_doc:', JSON.stringify(node.source_doc), 'source_chunk:', JSON.stringify(node.source_chunk));
 
               await window.electronAPI.db.createEdge({
                 mindmap_id: mindmap.id,

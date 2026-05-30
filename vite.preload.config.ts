@@ -13,8 +13,8 @@ export default defineConfig({
     rollupOptions: {
       external: ['electron'],
     },
-    sourcemap: true,
-    minify: false,
+    sourcemap: process.env.NODE_ENV === 'development',
+    minify: process.env.NODE_ENV !== 'development',
   },
   resolve: {
     alias: {

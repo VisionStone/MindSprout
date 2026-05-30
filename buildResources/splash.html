@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindSprout 思维芽</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 400px;
+      height: 300px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      overflow: hidden;
+    }
+    
+    .logo-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      width: 100%;
+      height: 100%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+    
+    .title {
+      color: white;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    
+    .subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+    
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .loading-bar {
+      width: 200px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .loading-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #f093fb, #f5576c);
+      border-radius: 2px;
+      animation: loading 2s ease-in-out infinite;
+    }
+    
+    @keyframes loading {
+      0% { width: 0%; transform: translateX(-100%); }
+      50% { width: 100%; transform: translateX(0%); }
+      100% { width: 100%; transform: translateX(100%); }
+    }
+    
+    .loading-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+    }
+    
+    .dots {
+      display: inline-block;
+    }
+    
+    .dots::after {
+      content: '';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+    
+    @keyframes dots {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+      100% { content: ''; }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <svg class="logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="100" fill="white"/>
+      <circle cx="256" cy="256" r="45" fill="url(#bgGradient)"/>
+      <line x1="256" y1="211" x2="256" y2="130" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+      <line x1="288" y1="232" x2="370" y2="180" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+      <line x1="288" y1="280" x2="370" y2="332" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+      <line x1="256" y1="301" x2="256" y2="382" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+      <line x1="224" y1="280" x2="142" y2="332" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+      <line x1="224" y1="232" x2="142" y2="180" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="256" cy="110" r="28" fill="url(#bgGradient)"/>
+      <circle cx="390" cy="170" r="28" fill="url(#bgGradient)"/>
+      <circle cx="390" cy="342" r="28" fill="url(#bgGradient)"/>
+      <circle cx="256" cy="402" r="28" fill="url(#bgGradient)"/>
+      <circle cx="122" cy="342" r="28" fill="url(#bgGradient)"/>
+      <circle cx="122" cy="170" r="28" fill="url(#bgGradient)"/>
+    </svg>
+  </div>
+  
+  <div class="title">思维芽</div>
+  <div class="subtitle">MindSprout</div>
+  
+  <div class="loading-container">
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+    <div class="loading-text">正在初始化<span class="dots"></span></div>
+  </div>
+</body>
+</html>
