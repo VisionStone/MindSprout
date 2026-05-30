@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v2-glassmorphism - MindSprout Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:#F5F3FF;
+    color:#1E1B4B;
+    min-height:100vh;
+    line-height:1.6;
+}
+
+.design-header{
+    padding:36px 48px 28px;
+    background:rgba(245,243,255,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,27,75,0.06);
+    position:sticky;top:0;z-index:100;
+}
+.design-header h1{font-family:'Inter',system-ui,sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
+.design-header .subtitle{font-size:13px;opacity:0.5;margin-bottom:10px;}
+.mood-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.mood-tag{padding:3px 10px;border-radius:999px;font-size:11px;font-weight:500;background:rgba(139,92,246,0.12);color:#8B5CF6;letter-spacing:0.02em;}
+.design-body{max-width:960px;margin:0 auto;padding:36px 24px 80px;}
+.section{margin-bottom:44px;}
+.section h2{font-family:'Inter',system-ui,sans-serif;font-size:17px;font-weight:600;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid rgba(30,27,75,0.08);}
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:14px;}
+.swatch{text-align:center;}
+.swatch-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;}
+.swatch-hex{font-size:10px;opacity:0.45;font-family:'SF Mono','JetBrains Mono',monospace;}
+.typo-demo h1{font-family:'Inter',system-ui,sans-serif;font-size:40px;font-weight:700;letter-spacing:-0.03em;line-height:1.15;margin-bottom:4px;}
+.typo-demo h2{font-family:'Inter',system-ui,sans-serif;font-size:26px;font-weight:600;letter-spacing:-0.02em;line-height:1.25;margin-bottom:4px;}
+.typo-demo h3{font-family:'Inter',system-ui,sans-serif;font-size:19px;font-weight:500;line-height:1.3;margin-bottom:4px;}
+.typo-demo p{font-size:14px;line-height:1.65;opacity:0.7;margin-bottom:6px;max-width:600px;}
+.typo-demo .font-label{font-size:12px;opacity:0.4;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.btn{padding:9px 22px;border-radius:8px;font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all 200ms ease;}
+.btn-primary{background:#F472B6;color:white;box-shadow:0 2px 8px rgba(244,114,182,0.25);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(244,114,182,0.35);}
+.btn-secondary{background:transparent;color:#8B5CF6;border:2px solid #8B5CF6;}
+.btn-secondary:hover{background:rgba(139,92,246,0.06);}
+.btn-ghost{background:transparent;color:#1E1B4B;opacity:0.65;}
+.btn-ghost:hover{opacity:1;background:rgba(30,27,75,0.05);}
+.pill{display:inline-flex;align-items:center;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:500;background:rgba(139,92,246,0.1);color:#8B5CF6;}
+.pill-outline{border:1px solid rgba(139,92,246,0.3);background:transparent;color:#8B5CF6;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.card{
+    background:rgba(255,255,255,0.6);
+    border-radius:12px;padding:22px;
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.06);
+    transition:all 250ms ease;
+}
+.card:hover{box-shadow:0 10px 25px rgba(0,0,0,0.08),0 4px 10px rgba(0,0,0,0.04);transform:translateY(-2px);}
+.card h4{font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:600;margin-bottom:5px;}
+.card p{font-size:13px;opacity:0.6;line-height:1.5;}
+.card .icon-box{width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:10px;color:#8B5CF6;}
+.tab-bar{display:flex;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.6);width:fit-content;margin-bottom:12px;}
+.tab{padding:7px 18px;font-size:13px;font-weight:500;cursor:pointer;transition:all 150ms;border-right:1px solid rgba(255,255,255,0.3);user-select:none;}
+.tab:last-child{border-right:none;}
+.tab.active{background:rgba(139,92,246,0.1);color:#8B5CF6;}
+.tab:hover:not(.active){background:rgba(30,27,75,0.04);}
+.spacing-table{width:100%;border-collapse:collapse;font-size:13px;}
+.spacing-table th{padding:6px 12px;text-align:left;opacity:0.5;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;}
+.spacing-table td{padding:8px 12px;border-bottom:1px solid rgba(30,27,75,0.06);}
+.spacing-table code{font-size:12px;font-family:'SF Mono','JetBrains Mono',monospace;}
+.spacing-bar{height:12px;border-radius:3px;background:rgba(139,92,246,0.3);}
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid rgba(30,27,75,0.07);display:flex;gap:16px;font-size:12px;opacity:0.45;}
+</style>
+</head>
+<body>
+<div class="design-header">
+    <h1>v2-glassmorphism</h1>
+    <div class="subtitle">MindSprout Design System</div>
+    <div class="mood-tags">
+        <span class="mood-tag">modern</span><span class="mood-tag">ethereal</span><span class="mood-tag">depth</span><span class="mood-tag">layered</span>
+    </div>
+</div>
+<div class="design-body">
+
+    <div class="section">
+        <h2>Color Palette</h2>
+        <div class="swatch-grid">
+            <div class="swatch">
+                <div class="swatch-preview" style="background:#8B5CF6;border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Primary</div>
+                <div class="swatch-hex">#8B5CF6</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:#A78BFA;border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Secondary</div>
+                <div class="swatch-hex">#A78BFA</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:#F472B6;border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Accent</div>
+                <div class="swatch-hex">#F472B6</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:#F5F3FF;border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Background</div>
+                <div class="swatch-hex">#F5F3FF</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:#1E1B4B;border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Text</div>
+                <div class="swatch-hex">#1E1B4B</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:rgba(255,255,255,0.6);border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Surface</div>
+                <div class="swatch-hex">rgba(255,255,255,0.6)</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:rgba(255,255,255,0.3);border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Border</div>
+                <div class="swatch-hex">rgba(255,255,255,0.3)</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-preview" style="background:#C4B5FD;border-radius:12px;width:100%;height:80px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);"></div>
+                <div class="swatch-name">Muted</div>
+                <div class="swatch-hex">#C4B5FD</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Typography</h2>
+        <div class="typo-demo">
+            <div class="font-label">Inter · Inter</div>
+            <h1>思维导图 MindSprout</h1>
+            <h2>结构化你的思想</h2>
+            <h3>Organize Your Thoughts</h3>
+            <p>MindSprout 是一款 AI 辅助的思维导图工具，帮助你捕捉灵感、组织想法、规划项目。通过直观的树形结构让复杂信息变得清晰可见。With AI-powered suggestions and beautiful layouts, MindSprout helps you think better.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Components</h2>
+        <div class="btn-group">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <span class="pill">Label</span>
+            <span class="pill pill-outline">Outline</span>
+        </div>
+        <div class="tab-bar">
+            <div class="tab active">All</div>
+            <div class="tab">Recent</div>
+            <div class="tab">Favorites</div>
+            <div class="tab">Archived</div>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon-box">🧠</div>
+                <h4>Mind Maps</h4>
+                <p>Create hierarchical mind maps with drag-and-drop simplicity.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">🤖</div>
+                <h4>AI Assistant</h4>
+                <p>Smart suggestions for branches, summaries, and titles.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">📝</div>
+                <h4>Markdown Notes</h4>
+                <p>Rich descriptions with full Markdown support and pagination.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Spacing Scale</h2>
+        <table class="spacing-table">
+            <thead><tr><th>Token</th><th>Value</th><th>Preview</th></tr></thead>
+            <tbody><tr><td><code>`--space-xs`</code></td><td style="opacity:0.6"><code>`4px` / `0.25rem`</code></td><td><div class="spacing-bar" style="width:8px"></div></td></tr>
+            <tr><td><code>`--space-sm`</code></td><td style="opacity:0.6"><code>`8px` / `0.5rem`</code></td><td><div class="spacing-bar" style="width:16px"></div></td></tr>
+            <tr><td><code>`--space-md`</code></td><td style="opacity:0.6"><code>`16px` / `1rem`</code></td><td><div class="spacing-bar" style="width:32px"></div></td></tr>
+            <tr><td><code>`--space-lg`</code></td><td style="opacity:0.6"><code>`24px` / `1.5rem`</code></td><td><div class="spacing-bar" style="width:48px"></div></td></tr>
+            <tr><td><code>`--space-xl`</code></td><td style="opacity:0.6"><code>`32px` / `2rem`</code></td><td><div class="spacing-bar" style="width:64px"></div></td></tr>
+            <tr><td><code>`--space-2xl`</code></td><td style="opacity:0.6"><code>`48px` / `3rem`</code></td><td><div class="spacing-bar" style="width:96px"></div></td></tr>
+            <tr><td><code>`--space-3xl`</code></td><td style="opacity:0.6"><code>`64px` / `4rem`</code></td><td><div class="spacing-bar" style="width:120px"></div></td></tr>
+            
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <span>v2-glassmorphism</span>
+        <span>·</span>
+        <span>8 color tokens</span>
+        <span>·</span>
+        <span>Inter</span>
+    </div>
+</div>
+</body>
+</html>
